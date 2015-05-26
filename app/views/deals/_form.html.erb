@@ -11,6 +11,10 @@
     </div>
   <% end %>
 
+  <%= f.label :advertiser_id %>
+
+  <%= f.select :advertiser_id, options_for_select(@advertisers.try(:collect) { |adv| [adv.name, adv.id] }, @deal.try(:advertiser_id) ), {prompt: "Choose Advertiser"} %>
+
   <%= f.label :proposition %>
   <%= f.text_field :proposition %>
 

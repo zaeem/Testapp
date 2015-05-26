@@ -4,6 +4,9 @@ DealSite::Application.routes.draw do
   end
 
   resources :deals do
+    collection do
+      get :get_record
+    end
     resource :advertiser
   end
 

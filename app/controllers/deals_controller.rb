@@ -1,9 +1,20 @@
 class DealsController < ApplicationController
   before_filter :assign_deal, only: [ :show, :edit, :update, :destroy ]
   before_filter :set_view_paths, only: :show
+  before_filter :load_all_advisers, only: [ :new, :edit, :update, :create ]
+
 
   def index
     @deals = Deal.all
+  end
+
+  def get_record
+    p = params[:page].to_i
+    p = p - 1 if p != 0
+    limit = 100
+    offset = p * limit
+    @deals = Deal.get_data(limit,  offset)
+    render partial: 'deals'
   end
 
   def show
@@ -14,14 +25,12 @@ class DealsController < ApplicationController
   end
 
   def new
-    @advertiser = Advertiser.find(params[:advertiser_id])
-    @deal = @advertiser.deals.build
+    @deal = Deal.new
   end
 
   def create
-    @advertiser = Advertiser.find(params[:advertiser_id])
-    @deal = @advertiser.deals.build(params[:deal])
-    if @deal.save
+    @deal = Deal.new(params[:deal])
+    if @deal.save!
       redirect_to edit_deal_path(@deal), notice: 'Deal was successfully created.'
     else
       render action: "new"
@@ -43,7 +52,10 @@ class DealsController < ApplicationController
 
 
   protected
-
+  def load_all_advisers
+    @advertisers = Advertiser.all
+  end
+  
   def assign_deal
     @deal = Deal.find(params[:id])
   end

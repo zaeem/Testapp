@@ -16,7 +16,10 @@ class DealsControllerTest < ActionController::TestCase
 
   test "should create deal" do
     assert_difference('Deal.count') do
-      post :create, deal: FactoryGirl.attributes_for(:deal), :advertiser_id => FactoryGirl.create(:advertiser).id
+      adv = FactoryGirl.create(:advertiser)
+      deal = FactoryGirl.attributes_for(:deal)
+      deal[:advertiser_id] = adv.id
+      post :create, deal: deal, :advertiser_id => adv.id
     end
 
     assert_redirected_to edit_deal_path(assigns(:deal))
