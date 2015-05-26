@@ -30,7 +30,7 @@ class DealsController < ApplicationController
 
   def create
     @deal = Deal.new(params[:deal])
-    if @deal.save!
+    if @deal.save
       redirect_to edit_deal_path(@deal), notice: 'Deal was successfully created.'
     else
       render action: "new"
