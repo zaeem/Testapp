@@ -1,0 +1,13 @@
+<% @deals.try(:each) do |deal| %>
+  <tr>
+    <td><%= deal.proposition %></td>
+    <td><%= deal.value %></td>
+    <td><%= deal.price %></td>
+    <td><%= deal.description %></td>
+    <td><%= deal.advertiser.name %></td>
+    <td><%= deal.advertiser.try(:publisher).try(:parent).try(:name) %> <%= deal.advertiser.try(:publisher).try(:name) %></td>
+    <td><%= link_to 'Show', deal %></td>
+    <td><%= link_to 'Edit', edit_deal_path(deal) %></td>
+    <td><%= link_to 'Destroy', deal, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>

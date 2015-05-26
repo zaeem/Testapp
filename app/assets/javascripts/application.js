@@ -14,4 +14,4 @@
 //= require jquery_ujs
 //= require jquery.periodic
 //= require deal
-//= require_tree .
+//= require scrollinity

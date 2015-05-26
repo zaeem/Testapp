@@ -14,4 +14,8 @@ class Deal < ActiveRecord::Base
   def savings
     20
   end
+
+  def self.get_data(limit, offset)
+    limit(limit).offset(offset).includes(advertiser: :publisher)
+  end
 end

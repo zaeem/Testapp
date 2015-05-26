@@ -1,0 +1,12 @@
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+<%= stylesheet_link_tag   main_css_file, :media => "all" %>
+<%= stylesheet_link_tag  "#{@deal.advertiser.publisher.theme}/assets/stylesheets/deals", :media => "all" %>
+
+<script type="text/javascript">
+  var aaDealPath = '<%= deal_path @deal, :format => "json" %>';
+</script>
+
+<%= javascript_include_tag "application" %>
+<%= csrf_meta_tag %>
